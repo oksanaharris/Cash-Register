@@ -18,7 +18,6 @@ window.cashRegister = (function(){
   for (let i = 0; i < nums.length; i ++){
     nums[i].addEventListener("click", addToDisplay);
   }
-  // this adds event listeners to multiple elements and references the function name for amending the display
 
   var ops = document.getElementsByClassName('operatorBtn');
   for (let i = 0; i < ops.length; i ++){
@@ -42,14 +41,12 @@ window.cashRegister = (function(){
 
   function getBalanceFunc (){
     displayEl.innerHTML = balance;
-    console.log(balance);
   }
 
   function depositFunc(){
     balance += Number(display);
     display = "";
     displayEl.innerHTML = display;
-    console.log(balance + ' ' + display);
   }
 
   function withdrawFunc(){
@@ -78,7 +75,6 @@ window.cashRegister = (function(){
     }
     displayEl.innerHTML = display;
     lastEntered = e.target.value;
-    console.log(lastEntered);
   }
   
   function clearDisplay () {
@@ -117,7 +113,6 @@ window.cashRegister = (function(){
     displayEl.innerHTML = display;
     operator = e.target.id;
     lastEntered = e.target.id;
-    console.log(lastEntered);
   }
 
   function equal(e){
@@ -132,9 +127,7 @@ window.cashRegister = (function(){
       operator = e.target.value;
       equalRun = true;
       lastEntered = e.target.value;
-      console.log(lastEntered);
     }
-  
   }
 
   function calculate(){
