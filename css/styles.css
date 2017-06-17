@@ -1,0 +1,10 @@
+body {
+  /*background-color: yellow;*/
+}
+
+#display {
+  border: solid 1px black;
+  height: 20px;
+  width: 200px;
+  border-radius: 2px;
+}
