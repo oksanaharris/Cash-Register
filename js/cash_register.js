@@ -9,7 +9,7 @@ window.cashRegister = (function(){
   var balance = 0;
   var resultPrinted;
   var equalRun;
-  var lastEnetered;
+  var lastEntered;
 
   var displayEl = document.getElementById("display");
   displayEl.innerHTML = display;
@@ -65,8 +65,6 @@ window.cashRegister = (function(){
     }
     else {
       if (e.target.value === "."){
-        console.log(typeof display);
-        console.log(display.charAt(display.length-1));
         if (display.charAt(display.length-1) === "."){
           display = display; 
         }
@@ -79,6 +77,8 @@ window.cashRegister = (function(){
       }
     }
     displayEl.innerHTML = display;
+    lastEntered = e.target.value;
+    console.log(lastEntered);
   }
   
   function clearDisplay () {
@@ -102,21 +102,39 @@ window.cashRegister = (function(){
     }
 
     else {
-      calculate();
-      display = parseFloat(calc.getTotal()).toFixed(2);
-      resultPrinted = true;
-      calc.loadTotal(Number(display)); 
+      if (lastEntered === "+" || lastEntered === "-" || lastEntered === "*" || lastEntered === "/"){
+        operator = e.target.id;
+        return;
+      }
+      else {
+        calculate();
+        display = parseFloat(calc.getTotal()).toFixed(2);
+        resultPrinted = true;
+        calc.loadTotal(Number(display)); 
+      }
     }
+
     displayEl.innerHTML = display;
     operator = e.target.id;
+    lastEntered = e.target.id;
+    console.log(lastEntered);
   }
 
   function equal(e){
-    calculate();
-    display = parseFloat(calc.getTotal()).toFixed(2);
-    displayEl.innerHTML = display;
-    operator = e.target.value;
-    equalRun = true;
+    if (lastEntered === "+" || lastEntered === "-" || lastEntered === "*" || lastEntered === "/"){
+        operator = e.target.value;
+        return;
+      }
+    else {
+      calculate();
+      display = parseFloat(calc.getTotal()).toFixed(2);
+      displayEl.innerHTML = display;
+      operator = e.target.value;
+      equalRun = true;
+      lastEntered = e.target.value;
+      console.log(lastEntered);
+    }
+  
   }
 
   function calculate(){
