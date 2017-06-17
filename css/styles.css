@@ -7,4 +7,33 @@ body {
   height: 20px;
   width: 200px;
   border-radius: 2px;
+  text-align: right;
+  padding: 5px;
+}
+
+#calculator {
+  /*background-color: yellow;*/
+  /*overflow-wrap: auto;*/
+}
+
+.number {
+  height: 25px;
+  width: 30px;
+  margin-bottom: 5px;
+}
+
+.operatorBtn {
+  height: 25px;
+  width: 30px;
+}
+
+.otherOpBtn {
+  height: 25px;
+  width: 100px;
+}
+
+#equalBtn {
+  height: 25px;
+  width: 100px;
+  margin-left: 135px;
 }
