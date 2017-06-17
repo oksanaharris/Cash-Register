@@ -59,23 +59,28 @@ window.cashRegister = (function(){
   }
 
   function addToDisplay (e){
-    if (resultPrinted === false){ 
-      if (display === "0.00"){
+    if (resultPrinted === true || display === "0.00" || display === ""){
       display = e.target.value;
-      displayEl.innerHTML = display; 
+      resultPrinted = false;
+    }
+    else {
+      if (e.target.value === "."){
+        console.log(typeof display);
+        console.log(display.charAt(display.length-1));
+        if (display.charAt(display.length-1) === "."){
+          display = display; 
+        }
+        else {
+          display += e.target.value;
+        }
       }
       else {
         display += e.target.value;
-        displayEl.innerHTML = display; 
       }
     }
-    else{
-      display = e.target.value;
-      displayEl.innerHTML = display;
-      resultPrinted = false; 
-    }
+    displayEl.innerHTML = display;
   }
-
+  
   function clearDisplay () {
     display = "0.00";
     calc.loadTotal(Number(display));
