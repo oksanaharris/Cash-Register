@@ -11,15 +11,17 @@
 //function to add numbers to the display when pressing (1-0,0,00, and .)
 
 window.cashRegister = (function(){
+
+  const calc = calculator;
+
   var display = "0";
-  var parameter1 = '';
-  var parameter2 = '';
+  // var parameter1 = '';
+  // var parameter2 = '';
   var operator = '';
-  var queuedOperator;
-  var currentOperator;
-  var result;
+  // var result;
   var balance = 0;
   var resultPrinted;
+  var equalRun;
 
   var displayEl = document.getElementById("display");
   displayEl.innerHTML = display;
@@ -88,41 +90,79 @@ window.cashRegister = (function(){
 
   function clearDisplay () {
     display = "0";
+    calc.loadTotal(Number(display));
     displayEl.innerHTML = display;
-    parameter1 = "";
-    parameter2 = "";
+    // parameter1 = "";
+    // parameter2 = "";
     operator = "";
-    result = "";
-    console.log('parameter1: ' + parameter1 + ' operator: ' + operator + 'parameter2: ' + parameter2 + ' result: ' + result);
+    // result = "";
   }
 
   function operation (e){
+    
     if (operator === ""){
-      parameter1 = display;
+      // parameter1 = display;
+      calc.loadTotal(Number(display));
       display = "";
-      displayEl.innerHTML = display;
-      operator = e.target.id;
-      console.log('parameter1: ' + parameter1 + ' operator: ' + operator + 'parameter2: ' + parameter2 + ' result: ' + result);
     }
-    else {
-      parameter2 = display;
-      result = calculator.compute(parameter1, parameter2, operator);
-      display = result;
+
+    else if (operator === "="){
+      calc.loadTotal(Number(display));
+      display = calc.getTotal();
       resultPrinted = true;
-      console.log('parameter1: ' + parameter1 + ' operator: ' + operator + 'parameter2: ' + parameter2 + ' result: ' + result);
-      displayEl.innerHTML = display;
-      parameter1 = result;
-      operator = e.target.id;
-      parameter2 = "";
     }
+      // displayEl.innerHTML = display;
+      // operator = e.target.id;
+    else {
+      // parameter2 = display;
+      // result = calculator.compute(parameter1, parameter2, operator);
+
+      switch(operator){
+      case "+":
+        calc.add(Number(display));
+        break;
+      case "-":
+        calc.subtract(Number(display));
+        break;
+      case "*":
+        calc.multiply(Number(display));
+        break;
+      case "/":
+        calc.divide(Number(display));
+        break;
+      }
+
+      display = calc.getTotal();
+      resultPrinted = true;
+      calc.loadTotal(Number(display));
+      
+    }
+    displayEl.innerHTML = display;
+    operator = e.target.id;
   }
 
-  function calculate(num1,num2,op){
-    parameter2 = display;
-    result = calculator.compute(parameter1, parameter2, operator);
-    display = result;
+  function calculate(e){
+    // parameter2 = display;
+    // result = calculator.compute(parameter1, parameter2, operator);
+    switch(operator){
+      case "+":
+        calc.add(Number(display));
+        break;
+      case "-":
+        calc.subtract(Number(display));
+        break;
+      case "*":
+        calc.multiply(Number(display));
+        break;
+      case "/":
+        calc.divide(Number(display));
+        break;
+      }
+    display = calc.getTotal();
     displayEl.innerHTML = display;
-    parameter1 = '';
-    console.log('parameter1: ' + parameter1 + ' operator: ' + operator + 'parameter2: ' + parameter2 + ' result: ' + result);
+    // parameter1 = '';
+    equalRun = true;
+    operator = e.target.id;
+    // console.log('parameter1: ' + parameter1 + ' operator: ' + operator + 'parameter2: ' + parameter2 + ' result: ' + result);
   }
 })();

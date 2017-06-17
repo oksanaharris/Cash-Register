@@ -41,23 +41,94 @@ var calculator = (function(){
   //   return total;
   // }
 
-  function compute(num1, num2, op){
-    switch(op){
-      case "+":
-        result = Number(num1) + Number(num2);
-        break;
-      case "-":
-        result = Number(num1) - Number(num2);
-        break;
-      case "*":
-        result = Number(num1) * Number(num2);
-        break;
-      case "/":
-        result = Number(num1) / Number(num2);
-        break;
-    }
-    return result;
+  let memory = 0;
+  
+  let total = 0;
+
+  function loadTotal(num){
+    validate(num);
+    total = num;
+    return total;
   }
+
+  function getTotal (){
+    return total;
+  }
+
+  function add (num){
+    validate(num);
+    total += num;
+    return total;
+  }
+
+  function subtract (num){
+    validate(num);
+    total -= num;
+    return total;
+  }
+
+  function multiply (num){
+    validate(num);
+    total *= num;
+    return total;
+  }
+
+  function divide (num){
+    validate(num);
+    total /= num;
+    return total;
+  }
+
+  function recallMemory(){
+    return memory;
+  }
+
+  function saveMemory(){
+    memory = total;
+    return memory;
+  }
+
+  function clearMemory(){
+    memory = 0;
+    return memory;
+  }
+
+  function validate(num){
+    if (typeof num !== 'number'){
+      throw new Error ("Please enter a valid number.");
+    }
+  }
+
+  return {
+    loadTotal: loadTotal,
+    getTotal: getTotal,
+    add: add,
+    subtract: subtract,
+    multiply: multiply,
+    divide: divide,
+    recallMemory: recallMemory,
+    saveMemory: saveMemory,
+    clearMemory: clearMemory
+  };
+
+  // function compute(num1, num2, op){
+    
+  //   switch(op){
+  //     case "+":
+  //       result = Number(num1) + Number(num2);
+  //       break;
+  //     case "-":
+  //       result = Number(num1) - Number(num2);
+  //       break;
+  //     case "*":
+  //       result = Number(num1) * Number(num2);
+  //       break;
+  //     case "/":
+  //       result = Number(num1) / Number(num2);
+  //       break;
+  //   }
+  //   return result;
+  // }
 
   // function deposit (num){
   //   validate(num);
@@ -84,15 +155,15 @@ var calculator = (function(){
   //   }
   // }
 
-  return {
-    // add: add,
-    // subtract: subtract,
-    // multiply: multiply,
-    // divide: divide,
-    compute: compute
-    // getBalance: getBalance,
-    // deposit: deposit,
-    // withdraw: withdraw,
-    // clear: clear
-  };
+  // return {
+  //   add: add,
+  //   subtract: subtract,
+  //   multiply: multiply,
+  //   divide: divide,
+  //   compute: compute,
+  //   getBalance: getBalance,
+  //   deposit: deposit,
+  //   withdraw: withdraw,
+  //   clear: clear
+  // };
 })();
